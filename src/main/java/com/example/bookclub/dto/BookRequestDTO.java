@@ -1,11 +1,17 @@
 package com.example.bookclub.dto;
 
 import com.example.bookclub.model.BookStatus;
+import jakarta.validation.constraints.NotBlank;
 
 public class BookRequestDTO {
 
+    @NotBlank(message = "Título é obrigatório")
     private String title;
+
+    @NotBlank(message = "Autor é obrigatório")
     private String author;
+
+    @NotBlank(message = "Gênero do livro é obrigatório")
     private String genre;
 
     public BookRequestDTO() {
