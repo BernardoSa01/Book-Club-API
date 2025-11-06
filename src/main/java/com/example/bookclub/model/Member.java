@@ -18,18 +18,18 @@ public class Member {
     private MembershipType membershipType;
 
     @OneToMany(mappedBy = "borrowedBy")
-    private List<Book> book;
+    private List<Book> books;
 
     public Member() {
     }
 
-    public Member(long id, String name, String email, String password, MembershipType membershipType, List<Book> book) {
+    public Member(long id, String name, String email, String password, MembershipType membershipType, List<Book> books) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.password = password;
         this.membershipType = membershipType;
-        this.book = book;
+        this.books = books;
     }
 
     public long getId() {
@@ -72,11 +72,11 @@ public class Member {
         this.membershipType = membershipType;
     }
 
-    public List<Book> getBook() {
-        return book;
+    public List<Book> getBooks() {
+        return books;
     }
 
-    public void setBook(List<Book> book) {
-        this.book = book;
+    public void setBooks(List<Book> book) {
+        this.books = book;
     }
 }
