@@ -1,6 +1,6 @@
 package com.example.bookclub.model;
 
 public enum BookStatus {
-    AVALIABLE,
+    AVAILABLE,
     BORROWED
 }
