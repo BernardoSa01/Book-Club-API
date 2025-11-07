@@ -10,6 +10,7 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -34,6 +35,18 @@ public class BookController {
         BookResponseDTO response = bookMapper.toDto(createdBook);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
+    }
+
+    // Empréstimo de livros
+    @PostMapping("/{id}/borrow/{memberId}")
+    public ResponseEntity<BookResponseDTO> borrowBook(@PathVariable Long id, @PathVariable Long memberId) {
+
+        Book borrowedBook = bookService.borrowBook(id, memberId);
+
+        BookResponseDTO response = bookMapper.toDto(borrowedBook);
+
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+
     }
 
     @GetMapping("/{id}")
@@ -67,6 +80,16 @@ public class BookController {
         Book updatedBook = bookService.update(id, book);
 
         BookResponseDTO response = bookMapper.toDto(updatedBook);
+
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
+    // Devolução de livros
+    @PutMapping("/{id}/return")
+    public ResponseEntity<BookResponseDTO> returnBook(@PathVariable Long id) {
+        Book returnedBook = bookService.returnBook(id);
+
+        BookResponseDTO response = bookMapper.toDto(returnedBook);
 
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
