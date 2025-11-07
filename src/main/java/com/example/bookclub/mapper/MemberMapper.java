@@ -3,11 +3,18 @@ package com.example.bookclub.mapper;
 import com.example.bookclub.dto.MemberRequestDTO;
 import com.example.bookclub.dto.MemberResponseDTO;
 import com.example.bookclub.model.Member;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.Collections;
 import java.util.stream.Collectors;
 
+@Component
 public class MemberMapper {
+
+    @Autowired
+    private BookMapper bookMapper;
+
 
     public Member toEntity(MemberRequestDTO dto) {
         if (dto == null) return null;
@@ -30,13 +37,14 @@ public class MemberMapper {
         memberDto.setEmail(entity.getEmail());
         memberDto.setMembershipType(entity.getMembershipType());
 
-        memberDto.setBorrowedBooks(
-                entity.getBooks() == null
-                        ? Collections.emptyList()
-                        : entity.getBooks().stream()
-                        .map(BookMapper::toDto)
-                        .collect(Collectors.toList())
-        );
+        if (entity.getBooks() != null) {
+            memberDto.setBorrowedBooks(
+                    entity.getBooks().stream()
+                            .map(bookMapper::toDto) // uso da instância injetada
+                            .collect(Collectors.toList())
+            );
+        }
+
         return memberDto;
     }
 }
