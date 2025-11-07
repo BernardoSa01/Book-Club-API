@@ -3,6 +3,7 @@ package com.example.bookclub.mapper;
 import com.example.bookclub.dto.BookRequestDTO;
 import com.example.bookclub.dto.BookResponseDTO;
 import com.example.bookclub.model.Book;
+import com.example.bookclub.model.BookStatus;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -15,6 +16,7 @@ public class BookMapper {
         book.setTitle(dto.getTitle());
         book.setAuthor(dto.getAuthor());
         book.setGenre(dto.getGenre());
+        book.setBookStatus(BookStatus.AVAILABLE);
 
         return book;
     }

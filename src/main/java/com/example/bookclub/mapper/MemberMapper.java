@@ -6,6 +6,7 @@ import com.example.bookclub.model.Member;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.stream.Collectors;
 
@@ -37,13 +38,14 @@ public class MemberMapper {
         memberDto.setEmail(entity.getEmail());
         memberDto.setMembershipType(entity.getMembershipType());
 
-        if (entity.getBooks() != null) {
-            memberDto.setBorrowedBooks(
-                    entity.getBooks().stream()
-                            .map(bookMapper::toDto) // uso da instância injetada
-                            .collect(Collectors.toList())
-            );
-        }
+        // Garante que borrowedBooks nunca seja null
+        memberDto.setBorrowedBooks(
+                entity.getBooks() != null
+                        ? entity.getBooks().stream()
+                        .map(bookMapper::toDto)
+                        .collect(Collectors.toList())
+                        : new ArrayList<>() // caso null, retorna []
+        );
 
         return memberDto;
     }
