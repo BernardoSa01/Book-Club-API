@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import java.util.List;
 
 @Entity
+@Table(name = "members")
 public class Member {
 
     @Id // Garante que o Id será uma chave primária no banco de dados
