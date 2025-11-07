@@ -3,10 +3,12 @@ package com.example.bookclub.mapper;
 import com.example.bookclub.dto.BookRequestDTO;
 import com.example.bookclub.dto.BookResponseDTO;
 import com.example.bookclub.model.Book;
+import org.springframework.stereotype.Component;
 
+@Component
 public class BookMapper {
 
-    public static Book toEntity(BookRequestDTO dto) {
+    public Book toEntity(BookRequestDTO dto) {
         if (dto == null) return null;
 
         Book book = new Book();
@@ -17,7 +19,7 @@ public class BookMapper {
         return book;
     }
 
-    public static BookResponseDTO toDto(Book entity) {
+    public BookResponseDTO toDto(Book entity) {
         if (entity == null) return null;
 
         BookResponseDTO bookDto = new BookResponseDTO();
